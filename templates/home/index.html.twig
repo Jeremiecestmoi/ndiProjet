@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block page_id %}home{% endblock %}
+{% block title %}Accueil — Village Résistant{% endblock %}
+{% block body %}
+    <div class="hero text-center mb-5 reveal">
+        <h1 class="fw-bold">Bienvenue dans le Village Numérique Résistant ⚔️</h1>
+        <p class="fs-5 mt-3">Combattez l’obsolescence. Défendez le libre. Rejoignez NIRD.</p>
+    </div>
+
+    <h2 class="fw-bold mb-3">🔥 Défis en vedette</h2>
+    <div class="row">
+        {% for c in topChallenges %}
+            <div class="col-md-4 reveal">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="mb-2">{{ c.title }}</h4>
+                        <p class="text-muted">{{ c.description }}</p>
+                        <span class="badge bg-primary">{{ c.points }} points</span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

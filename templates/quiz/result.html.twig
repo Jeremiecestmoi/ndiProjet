@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block page_id %}quiz{% endblock %}
+{% block title %}Résultat{% endblock %}
+{% block body %}
+    <div class="card shadow-xl rounded-xl p-5 text-center">
+        <h1 class="fw-bold mb-3">Résultat 🎉</h1>
+        <p class="lead">Vous avez obtenu :</p>
+        <div class="display-3 fw-bold text-primary mb-4">{{ score }} / {{ quiz.questions|length }}</div>
+        <div class="d-flex gap-2 justify-content-center">
+            <a href="{{ path('quiz_play') }}" class="btn btn-outline-primary btn-lg">Rejouer</a>
+            <a href="{{ path('home') }}" class="btn btn-success btn-lg">Accueil</a>
+        </div>
+    </div>
+{% endblock %}

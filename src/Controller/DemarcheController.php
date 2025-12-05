@@ -6,13 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class WelcomeController extends AbstractController
+class DemarcheController extends AbstractController
 {
-    #[Route('/welcome', name: 'app_welcome')]
+    #[Route('/demarche-nird', name: 'app_demarche')]
     public function index(): Response
     {
-        return $this->render('welcome/index.html.twig', [
-            'message' => 'Bienvenue sur ton projet +',
-        ]);
+        return $this->render('demarche/index.html.twig');
     }
 }

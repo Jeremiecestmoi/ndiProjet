@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quiz : {{ quiz.title }}{% endblock %}
+
+{% block body %}
+    <h1>{{ quiz.title }}</h1>
+
+    <form action="{{ path('quiz_check', {id: quiz.id}) }}" method="post">
+
+        {% for q in quiz.questions %}
+            <div class="mb-4 p-3 bg-white rounded shadow-sm">
+                <h5>{{ loop.index }}. {{ q.label }}</h5>
+
+                {% for choice, index in q.choices %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="q{{ q.id }}" value="{{ loop.index0 }}" required>
+                        <label class="form-check-label">{{ choice }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <button class="btn btn-primary">Valider</button>
+    </form>
+
+{% endblock %}
