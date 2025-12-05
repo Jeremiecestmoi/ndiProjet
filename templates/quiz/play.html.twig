@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block page_id %}quiz{% endblock %}
+{% block title %}Quiz — {{ quiz.title }}{% endblock %}
+{% block body %}
+    <h1 class="fw-bold">{{ quiz.title }}</h1>
+    <p class="text-muted mb-3">Testez vos connaissances sur le numérique responsable</p>
+
+    <div class="progress progress-quiz mb-4" role="progressbar" aria-label="Progression du quiz">
+        <div class="progress-bar bg-primary" style="width:0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+    </div>
+
+    <form method="post" action="{{ path('quiz_check') }}" data-quiz data-total="{{ quiz.questions|length }}">
+        {% for q in quiz.questions %}
+            <div class="quiz-block mb-3 reveal">
+                <h5 class="fw-bold mb-3">{{ loop.index }}. {{ q.label }}</h5>
+                {% for choice in q.choices %}
+                    <label class="quiz-option">
+                        <input type="radio" class="form-check-input mt-1" name="q{{ loop.parent.loop.index0 }}" value="{{ loop.index0 }}" required>
+                        <span>{{ choice }}</span>
+                    </label>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <button class="btn btn-primary btn-lg mt-2" type="submit">Valider mes réponses</button>
+    </form>
+{% endblock %}

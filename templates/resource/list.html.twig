@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block page_id %}resources{% endblock %}
+{% block title %}Ressources{% endblock %}
+{% block body %}
+    <h1 class="fw-bold mb-3">📚 Ressources du Village</h1>
+
+    <div class="category-filter btn-group mb-3" role="group" aria-label="Filtrer par catégorie">
+        <input type="radio" class="btn-check" name="cat" id="cat-all" value="all" checked>
+        <label class="btn btn-outline-secondary" for="cat-all">Toutes</label>
+
+        {# cats est passé par le contrôleur #}
+        {% for c in cats %}
+            <input type="radio" class="btn-check" name="cat" id="cat-{{ c|lower|replace({' ':'-'}) }}" value="{{ c }}">
+            <label class="btn btn-outline-secondary" for="cat-{{ c|lower|replace({' ':'-'}) }}">{{ c }}</label>
+        {% endfor %}
+    </div>
+
+
+    <div class="row" data-resources>
+        {% for r in resources %}
+            <div class="col-md-6 mb-4" data-cat="{{ r.category ?? 'Autre' }}">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h4 class="mb-2">{{ r.title }}</h4>
+                        <p class="text-muted mb-3">{{ r.description }}</p>
+                        {% if r.category %}<span class="tag mb-3">{{ r.category }}</span>{% endif %}
+                        <div class="mt-auto d-flex gap-2">
+                            <a href="{{ r.url }}" target="_blank" rel="noopener" class="btn btn-primary">Consulter →</a>
+                            <button type="button" class="btn btn-outline-secondary" data-copy="{{ r.url }}">Copier le lien</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
